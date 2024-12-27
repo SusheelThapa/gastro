@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
+
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
@@ -15,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` bg-white dark:bg-black min-h-screen bg-background text-foreground`}
+        className={`min-h-screen bg-background text-foreground`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
