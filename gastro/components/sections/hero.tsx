@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ export const HeroSection: React.FC = () => {
           gastronomy with Gastro
         </p>
         <Button className="bg-black text-white border-black dark:bg-white dark:text-black dark:border-white border-2 text-xl font-bold tracking-wide py-6 px-8 rounded-xl my-10 transition duration-300 ease-in-out hover:scale-105">
-          Get Started for Free
+          <Link href={"/generate"}>Get Started for Free</Link>
         </Button>
       </div>
     </section>

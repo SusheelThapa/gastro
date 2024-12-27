@@ -16,7 +16,7 @@ export function Navbar() {
             asChild
             className="text-black dark:text-white hover:underline tracking-wider font-medium text-lg"
           >
-            <Link href={"#" + item.toLowerCase().replace(" ", "-")}>
+            <Link href={`#${item.toLowerCase().replace(" ", "-")}`}>
               {item}
             </Link>
           </Button>
