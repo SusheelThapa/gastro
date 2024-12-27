@@ -14,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` bg-white dark:bg-black`}>
+      <body
+        className={` bg-white dark:bg-black min-h-screen bg-background text-foreground`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

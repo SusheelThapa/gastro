@@ -4,8 +4,8 @@ import { ModeToggle } from "../mode-toggle";
 
 export function Navbar() {
   return (
-    <nav className=" container mx-auto border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-black py-3 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-24">
-      <Link href="/" className="text-3xl font-bold text-black dark:text-white">
+    <nav className="w-full max-w-5xl space-y-8 flex justify-between items-end border-b-2 pb-4 border-gray-600">
+      <Link href={"/"} className="text-4xl md:text-5xl font-bold">
         Gastro
       </Link>
       <div className="flex-1 flex justify-center items-center">
@@ -14,7 +14,7 @@ export function Navbar() {
             key={item}
             variant="ghost"
             asChild
-            className="text-black dark:text-white hover:underline tracking-wider font-medium text-lg"
+            className=" hover:underline tracking-wider font-medium text-lg"
           >
             <Link href={`#${item.toLowerCase().replace(" ", "-")}`}>
               {item}

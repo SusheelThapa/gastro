@@ -4,7 +4,7 @@ import { Github, Twitter, Linkedin } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-white text-black dark:bg-black dark:text-white py-12">
+    <footer className="w-full max-w-5xl">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 align-middle">
           <h2 className="font-bold text-4xl">Gastro</h2>
@@ -64,7 +64,7 @@ const ContactUs: React.FC = () => (
 );
 
 const Copyright: React.FC = () => (
-  <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+  <div className="mt-8 pt-8 border-t  text-center">
     <p>&copy; 2025 Gastro. All rights reserved.</p>
   </div>
 );

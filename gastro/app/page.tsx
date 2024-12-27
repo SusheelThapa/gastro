@@ -9,7 +9,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col relative bg-white dark:bg-black lg:px-64">
+    <main className="container mx-auto p-6 space-y-32 flex flex-col items-center ">
       <Navbar />
       <HeroSection />
       <FeaturesSection />

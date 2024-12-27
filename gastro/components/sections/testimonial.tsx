@@ -14,7 +14,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <Card className="bg-white text-black dark:bg-black dark:text-white border border-gray-200 dark:border-gray-800">
+    <Card className=" border border-gray-200 dark:border-gray-800">
       <CardContent className="flex items-start gap-4 pt-6">
         <Image
           src={image}
@@ -34,12 +34,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
 export const TestimonialsSection: React.FC = () => {
   return (
-    <section className="py-28 bg-white dark:bg-black px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-12 text-black dark:text-white">
+    <section className="w-full max-w-5xl flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto py-8">
+        <h2 className="text-5xl font-bold text-center pb-12 ">
           What Our Users Say
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-16">
           <TestimonialCard
             quote="Gastro has revolutionized my cooking! It's like having a professional chef at my fingertips."
             author="Emily S., Home Cook"
