@@ -42,3 +42,5 @@ next-env.d.ts
 
 #custom ignore file 
 .next
+
+agenttemp

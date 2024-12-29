@@ -11,7 +11,7 @@ import { GastroAnswer } from "./gastro-answer";
 export function GastroResult() {
   const { gastroQuery } = useGastroContext();
   const { state: agentState } = useCoAgent({
-    name: "search_agent",
+    name: "gastro_agent",
   });
 
   console.log("AGENT_STATE", agentState);
