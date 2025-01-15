@@ -1,92 +1,67 @@
 "use client";
 
 import { useGastroContext } from "@/lib/gastro-provider";
-import { motion } from "framer-motion";
-import { BookOpenIcon, LoaderCircleIcon, SparkleIcon } from "lucide-react";
+import { LoaderCircleIcon } from "lucide-react";
 import { useCoAgent } from "@copilotkit/react-core";
-import { GastroProgress } from "./gastro-progress";
 import { SkeletonLoader } from "./skeleton-loader";
 import { GastroAnswer } from "./gastro-answer";
+import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 export function GastroResult() {
   const { gastroQuery } = useGastroContext();
   const { state: agentState } = useCoAgent({
-    name: "search_agent",
+    name: "gastro_agent",
   });
 
   console.log("AGENT_STATE", agentState);
 
-  const steps =
-    agentState?.steps?.map((step: any) => {
-      return {
-        description: step.description || "",
-        status: step.status || "pending",
-        updates: step.updates || [],
-      };
-    }) || [];
-
-  const isLoading = !agentState?.answer?.markdown;
+  const isLoading = !agentState?.type;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <div className="max-w-[1000px] p-8 lg:p-4 flex flex-col gap-y-8 mt-4 lg:mt-6 text-sm lg:text-base">
-        <div className="space-y-4">
-          <h1 className="text-3xl lg:text-4xl font-extralight">
+    <div className="min-h-screen bg-background text-foreground ">
+      <div className="container mx-auto p-6  space-y-12 flex flex-col items-center p-8 lg:p-4 flex flex-col gap-y-8 mt-4 lg:mt-6 text-sm lg:text-base">
+        <div className="w-full max-w-5xl flex justify-between items-end border-b-2 pb-4 border-gray-600">
+          <Link href={"/"} className="text-4xl md:text-5xl font-bold">
+            Gastro
+          </Link>
+          <ModeToggle />
+        </div>
+
+        <div className="w-full max-w-5xl">
+          <h1 className="text-2xl lg:text-3xl font-extralight text-left">
             {gastroQuery}
           </h1>
-        </div>
 
-        <GastroProgress steps={steps} />
+          <div className="mt-6">
+            <div className=" flex flex-col">
+              {isLoading ? (
+                <>
+                  {" "}
+                  <h2 className="flex items-center gap-x-2">
+                    <LoaderCircleIcon className="animate-spin w-4 h-4 text-slate-500" />
+                    Answer
+                  </h2>
+                </>
+              ) : (
+                <></>
+              )}
 
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 lg:col-span-8 flex flex-col">
-            <h2 className="flex items-center gap-x-2">
-              {isLoading ? (
-                <LoaderCircleIcon className="animate-spin w-4 h-4 text-slate-500" />
-              ) : (
-                <SparkleIcon className="w-4 h-4 text-slate-500" />
-              )}
-              Answer
-            </h2>
-            <div className="text-slate-500 font-light">
-              {isLoading ? (
-                <SkeletonLoader />
-              ) : (
-                <GastroAnswer markdown={agentState?.answer?.markdown} />
-              )}
+              <div className="text-slate-500 font-light">
+                {isLoading ? (
+                  <SkeletonLoader />
+                ) : (
+                  <GastroAnswer
+                    type={agentState?.type}
+                    result={agentState?.result}
+                    recipes={agentState?.recipes}
+                  />
+                )}
+              </div>
             </div>
           </div>
-
-          {agentState?.answer?.references?.length && (
-            <div className="flex col-span-12 lg:col-span-4 flex-col gap-y-4 w-[200px]">
-              <h2 className="flex items-center gap-x-2">
-                <BookOpenIcon className="w-4 h-4 text-slate-500" />
-                References
-              </h2>
-              <ul className="text-slate-900 font-light text-sm flex flex-col gap-y-2">
-                {agentState?.answer?.references?.map(
-                  (ref: any, idx: number) => (
-                    <li key={idx}>
-                      <a
-                        href={ref.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {idx + 1}. {ref.title}
-                      </a>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

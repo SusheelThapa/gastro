@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../mode-toggle";
 
 export function Navbar() {
@@ -8,20 +7,7 @@ export function Navbar() {
       <Link href={"/"} className="text-4xl md:text-5xl font-bold">
         Gastro
       </Link>
-      <div className="flex-1 flex justify-center items-center">
-        {["Features", "How It Works", "Testimonials"].map((item) => (
-          <Button
-            key={item}
-            variant="ghost"
-            asChild
-            className=" hover:underline tracking-wider font-medium text-lg"
-          >
-            <Link href={`#${item.toLowerCase().replace(" ", "-")}`}>
-              {item}
-            </Link>
-          </Button>
-        ))}
-      </div>
+
       <ModeToggle />
     </nav>
   );

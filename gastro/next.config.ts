@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: 'standalone',
+  images: {
+    domains: ['img.spoonacular.com'],
+  },
 };
 
 export default nextConfig;
