@@ -1,6 +1,6 @@
 import { BookOpen } from "lucide-react";
 import { RecipeCard } from "./recipe-card";
-import Markdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 interface Recipe {
   id: string;
@@ -25,7 +25,7 @@ export const GastroAnswer = ({ type, result, recipes }: GastroAnswerProps) => {
       <div className="max-w-5xl w-full">
         <div>
           <div className="flex items-center gap-2 mb-4 text-gray-200"></div>
-          <Markdown>{result}</Markdown>
+          <ReactMarkdown>{result}</ReactMarkdown>
         </div>
       </div>
     );
