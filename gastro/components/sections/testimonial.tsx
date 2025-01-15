@@ -43,12 +43,12 @@ export const TestimonialsSection: React.FC = () => {
           <TestimonialCard
             quote="Gastro has revolutionized my cooking! It's like having a professional chef at my fingertips."
             author="Emily S., Home Cook"
-            image="/placeholder.svg"
+            image="/two.jpg"
           />
           <TestimonialCard
             quote="As a professional chef, I'm impressed by the depth of knowledge Gastro provides. It's an invaluable tool in my kitchen."
             author="Chef Michael R."
-            image="/placeholder.svg"
+            image="/one.jpg"
           />
         </div>
       </div>
