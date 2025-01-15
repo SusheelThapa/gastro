@@ -43,4 +43,6 @@ next-env.d.ts
 #custom ignore file 
 .next
 
-agenttemp
+.env
+.venv
+__pycache__
