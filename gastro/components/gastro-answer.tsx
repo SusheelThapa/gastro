@@ -1,8 +1,10 @@
 import { BookOpen } from "lucide-react";
 import { RecipeCard } from "./recipe-card";
 import ReactMarkdown from "react-markdown";
+import { useState } from "react";
+import { RecipeModal } from "./recipe-model";
 
-interface Recipe {
+export interface Recipe {
   id: string;
   title: string;
   image?: string;
@@ -19,6 +21,16 @@ interface GastroAnswerProps {
 }
 
 export const GastroAnswer = ({ type, result, recipes }: GastroAnswerProps) => {
+  const [selectedRecipe, setSelectedRecipe] = useState<
+    (typeof recipes)[0] | null
+  >(null);
+
+  const handleShowMore = (recipe: (typeof recipes)[0]) => {
+    setSelectedRecipe(recipe);
+  };
+
+  console.log(selectedRecipe);
+
   if (type === "chat") {
     console.log(result);
     return (
@@ -41,6 +53,8 @@ export const GastroAnswer = ({ type, result, recipes }: GastroAnswerProps) => {
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
+            id={recipe.id}
+            handleShowMore={handleShowMore}
             title={recipe.title}
             image={recipe.image}
             rating={recipe.rating}
@@ -50,6 +64,14 @@ export const GastroAnswer = ({ type, result, recipes }: GastroAnswerProps) => {
           />
         ))}
       </div>
+
+      {selectedRecipe && (
+        <RecipeModal
+          isOpen={!!selectedRecipe}
+          onClose={() => setSelectedRecipe(null)}
+          recipe={selectedRecipe}
+        />
+      )}
     </div>
   );
 };

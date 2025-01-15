@@ -1,32 +1,46 @@
-import { Card, CardContent,  CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 interface RecipeCardProps {
+  id: string;
   title: string;
   image?: string;
   rating?: number;
   ingredients: string[];
   instructions: string;
   sourceUrl?: string;
+  handleShowMore: (recipe: any) => void;
 }
 
-export function RecipeCard({ title, image, rating, ingredients, instructions, sourceUrl }: RecipeCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+export function RecipeCard({
+  id,
+  title,
+  image,
+  rating,
+  ingredients,
+  instructions,
+  sourceUrl,
+  handleShowMore,
+}: RecipeCardProps) {
   return (
     <Card className="w-full hover:box-shadow-2xl bg-background text-foreground border-gray-700   transition-all duration-300">
       {image && (
         <div className="relative w-full h-56 overflow-hidden rounded-t-lg">
           <Image
-            src={image} 
+            src={image}
             layout="fill"
-            alt={title} 
+            alt={title}
             className="object-cover transition-transform duration-300"
-            priority 
+            priority
           />
         </div>
       )}
@@ -40,10 +54,11 @@ export function RecipeCard({ title, image, rating, ingredients, instructions, so
         )}
       </CardHeader>
       <CardContent>
-        <div className={cn(
-          "space-y-4 transition-all duration-300",
-          !isExpanded && "max-h-36 overflow-hidden"
-        )}>
+        <div
+          className={cn(
+            "space-y-4 transition-all duration-300 max-h-36 overflow-hidden"
+          )}
+        >
           {ingredients.length > 0 && (
             <div>
               <h3 className="font-semibold mb-2">Ingredients</h3>
@@ -57,8 +72,8 @@ export function RecipeCard({ title, image, rating, ingredients, instructions, so
           {instructions && (
             <div>
               <h3 className="font-semibold  mb-2">Instructions</h3>
-              <div 
-                className="whitespace-pre-wrap" 
+              <div
+                className="whitespace-pre-wrap"
                 dangerouslySetInnerHTML={{ __html: instructions }}
               />
             </div>
@@ -67,14 +82,24 @@ export function RecipeCard({ title, image, rating, ingredients, instructions, so
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <Button
-          variant="ghost"
-          onClick={() => setIsExpanded(!isExpanded)}
+          variant="outline"
+          onClick={() =>
+            handleShowMore({
+              id,
+              title,
+              image,
+              rating,
+              ingredients,
+              instructions,
+              source_url: sourceUrl,
+            })
+          }
         >
-          {isExpanded ? "Show Less" : "Show More"}
+          Show More
         </Button>
         {sourceUrl && (
           <Button
-            variant="ghost"
+            variant="outline"
             onClick={() => window.open(sourceUrl, "_blank")}
           >
             View Source

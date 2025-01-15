@@ -44,5 +44,6 @@ next-env.d.ts
 .next
 
 .env
-.venv
+.venv/
 __pycache__
+.gitignore
