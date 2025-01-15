@@ -19,7 +19,7 @@ const ThemeSwitcher = () => {
         className="flex h-10 w-10 p-2 items-center justify-center rounded-md border border-gray-800 text-gray-800 focus:outline-none focus:ring-0 focus:ring-gray-200 dark:border-slate-300 dark:text-white"
       >
         <Switch
-          checked={systemTheme}
+          checked={systemTheme == "dark"}
           onCheckedChange={() =>
             setTheme(currentTheme === "dark" ? "light" : "dark")
           }
