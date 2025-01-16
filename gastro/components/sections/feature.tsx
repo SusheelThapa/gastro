@@ -37,17 +37,17 @@ export const FeaturesSection: React.FC = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
           <FeatureCard
-            icon={<ChefHat className="h-12 w-12" />}
+            icon={<ChefHat className="h-10 w-10" />}
             title="Recipe Suggestions"
             description="Get personalized recipe ideas based on your preferences and available ingredients."
           />
           <FeatureCard
-            icon={<Book className="h-12 w-12" />}
+            icon={<Book className="h-10 w-10" />}
             title="Cooking Techniques"
             description="Learn new cooking methods and improve your culinary skills with step-by-step guides."
           />
           <FeatureCard
-            icon={<MessageCircle className="h-12 w-12" />}
+            icon={<MessageCircle className="h-10 w-10" />}
             title="Culinary Q&A"
             description="Ask any food-related question and get expert answers instantly."
           />

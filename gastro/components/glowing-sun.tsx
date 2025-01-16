@@ -32,8 +32,8 @@ export const GlowingSun: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
     <svg viewBox="0 0 200 200" {...props}>
       <defs>
         <radialGradient id="sun-gradient" ref={gradientRef}>
-          <stop offset="0%" stopColor={colors[0]} />
-          <stop offset="100%" stopColor={colors[1]} stopOpacity="0" />
+          <stop offset="10%" stopColor={colors[0]} />
+          <stop offset="65%" stopColor={colors[1]} stopOpacity="0" />
         </radialGradient>
       </defs>
       <circle cx="100" cy="100" r="98" fill="url(#sun-gradient)">
