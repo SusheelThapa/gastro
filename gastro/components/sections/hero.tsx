@@ -1,10 +1,12 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { GlowingSun } from "../glowing-sun";
 
 export const HeroSection: React.FC = () => {
   return (
     <section className="fw-full max-w-5xl flex items-center justify-center px-4 sm:px-6 lg:px-24 ">
+      <GlowingSun className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-50" />
       <div className="container mx-auto text-center py-16">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6  drop-shadow-lg">
           Your AI-Powered Culinary Assistant

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Recipe } from "./gastro-answer";
 
 interface RecipeCardProps {
   id: string;
@@ -18,7 +19,7 @@ interface RecipeCardProps {
   ingredients: string[];
   instructions: string;
   sourceUrl?: string;
-  handleShowMore: (recipe: any) => void;
+  handleShowMore: (recipe: Recipe) => void;
 }
 
 export function RecipeCard({
