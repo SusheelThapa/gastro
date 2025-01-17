@@ -11,7 +11,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 import os
 from dotenv import load_dotenv
-
+from langchain_openai import ChatOpenAI
 # Agent State
 from recipe.state import AgentState, Recipe
 
@@ -55,7 +55,7 @@ def query_openai_node(state: AgentState):
         }
         return state
 
-    from langchain_openai import ChatOpenAI
+
 
     model = ChatOpenAI(
         model="gpt-4o-mini",
@@ -104,23 +104,66 @@ def query_openai_node(state: AgentState):
 def extract_ingredients_node(state: AgentState):
     """Node for extracting ingredients from text."""
     # Get the last message from the messages list
-    if not state.get("messages", []) or len(state.get("messages", [])) == 0:
-        return state
-    last_message = state.get("messages", [])
-    text = last_message[-1].content.lower() if last_message else ""
-    common_words = {'how', 'do', 'i', 'cook', 'a', 'dish', 'with', 'and', 'is', 'the', 'can', 'you'}
-    words = re.findall(r'\b\w+\b', text)
-    ingredients = [word for word in words if word.lower() not in common_words]
+    # if not state.get("messages", []) or len(state.get("messages", [])) == 0:
+    #     return state
+    # last_message = state.get("messages", [])
+    # text = last_message[-1].content.lower() if last_message else ""
+    # common_words = {'how', 'do', 'i', 'cook', 'a', 'dish', 'with', 'and', 'is', 'the', 'can', 'you'}
+    # words = re.findall(r'\b\w+\b', text)
+    # ingredients = [word for word in words if word.lower() not in common_words]
 
-    state["recipes"] = []  # Initialize empty recipes list
-    state["search_progress"] = []  # Initialize empty search progress
-    state["search_progress"].append({
-        "query": text,
-        "results": [],
-        "done": False
-    })
-    state["ingredients"] = ingredients
-    return state
+    # state["recipes"] = []  # Initialize empty recipes list
+    # state["search_progress"] = []  # Initialize empty search progress
+    # state["search_progress"].append({
+    #     "query": text,
+    #     "results": [],
+    #     "done": False
+    # })
+    # state["ingredients"] = ingredients
+    # return state
+    messages = state.get("messages", [])
+    if not messages:
+        return state  # No messages to process
+
+    last_message_content = messages[-1].content if messages else ""
+    query = f"Extract ingredients from the following text: '{last_message_content}'. Only give ingredients, don't give other things. If no ingredients are found just return None"
+
+    # Initialize the OpenAI model
+    model = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0,
+        max_tokens=50,
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_BASE_URL"),
+    )
+
+    try:
+        response = model.invoke(query)
+        ai_message_content = response.content
+        if(ai_message_content == "None"):
+            state["ingredients"] = []
+            # print("Ingredients not found")
+        else:
+        # Parse the response for ingredients
+            ingredients = ai_message_content.split(", ")  # Assuming the response lists ingredients
+            ingredients = [ingredient.strip() for ingredient in ingredients if ingredient]
+
+            # Update state
+            state["ingredients"] = ingredients
+
+        state["search_progress"] = [{
+            "query": last_message_content,
+            "results": [],
+            "done": False
+        }]
+        if not ingredients:
+            state["response"] = "No ingredients were found. Please provide more details."
+        return state
+
+    except Exception as e:
+        # Handle API failure
+        state["response"] = f"An error occurred while extracting ingredients: {str(e)}"
+        return state
 
 def is_recipe_query_node(state: AgentState):
     """Node for identifying if a query is recipe-related."""
@@ -163,12 +206,58 @@ def get_recipe_node(state: AgentState):
     current_search = state["search_progress"][-1]
     ingredients = state.get("ingredients", [])
     spoonacular_api_key = os.getenv("SPOONACULAR_API_KEY")  # Add your Spoonacular API key here
-
     # Construct the URL for finding recipes
     url = (
         f"https://api.spoonacular.com/recipes/findByIngredients?"
         f"ingredients={','.join(ingredients)}&number=4&apiKey={spoonacular_api_key}"
     )
+    if len(ingredients) == 0:
+        last_message = state.get("messages", [])
+        query = last_message[-1].content.lower() if last_message else ""
+
+        model = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0,
+        max_tokens=50,
+        openai_api_key=os.getenv("OPENAI_API_KEY"), 
+        base_url=os.getenv("OPENAI_BASE_URL"),
+        )
+
+        # try:
+        response = model.invoke(query)
+        # print("response:",response)
+        # print("response type",type(response))
+        try:
+            ai_message_content = response.content
+        
+            ai_response = {"messages": [AIMessage(content=ai_message_content)],
+            "recipes": [],
+            "type": "chat",
+            "result": ai_message_content,
+            "search_progress": [],
+            "ingredients": [],
+            "planning_progress": [
+            {                
+                "planned_recipes": [],
+                "done": True
+                }
+            ]
+            }
+            return ai_response
+        except Exception as e:
+            return {"messages": [AIMessage(error_message)],
+                "recipes": [],
+                "type": "error",
+                "result": error_message,
+                "search_progress": [],
+                "ingredients": [],
+                "planning_progress": [
+                {                
+                    "planned_recipes": [],
+                    "done": True
+                    }
+                ]
+            }
 
     try:
         # Fetch recipes using the ingredients
