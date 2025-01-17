@@ -18,9 +18,10 @@ export function GastroResult() {
 
   const isLoading = !agentState?.type;
 
+  console.log(isLoading)
   return (
     <div className="min-h-screen bg-background text-foreground ">
-      <div className="container mx-auto p-6  space-y-12 flex flex-col items-center p-8 lg:p-4 flex flex-col gap-y-8 mt-4 lg:mt-6 text-sm lg:text-base">
+      <div className="container mx-auto   space-y-12 items-center p-8 lg:p-4 flex flex-col gap-y-8 mt-4 lg:mt-6 text-sm lg:text-base">
         <div className="w-full max-w-5xl flex justify-between items-end border-b-2 pb-4 border-gray-600">
           <Link href={"/"} className="text-4xl md:text-5xl font-bold">
             Gastro
