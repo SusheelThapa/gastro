@@ -83,6 +83,9 @@ notebooks/Gastro-LangGraph.ipynb
 
 This notebook provides detailed insights into how the Langraph is structured and how it powers the recipe generation logic in **Gastro**.
 
+
+![Langgraph Image](https://github.com/user-attachments/assets/e17ee2e5-a985-44c6-9d2c-41363980b044)
+
 ## **Environmental Variables**
 
 ### For Frontend
