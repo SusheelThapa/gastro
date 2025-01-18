@@ -17,7 +17,7 @@ interface RecipeModalProps {
 export const RecipeModal = ({ isOpen, onClose, recipe }: RecipeModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-zinc-900 text-white border-zinc-800 max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="bg-background text-muted-foreground border-zinc-800 max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{recipe.title}</DialogTitle>
         </DialogHeader>
@@ -34,7 +34,7 @@ export const RecipeModal = ({ isOpen, onClose, recipe }: RecipeModalProps) => {
             <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
             <ul className="list-disc pl-5 space-y-1">
               {recipe.ingredients.map((ingredient, idx) => (
-                <li key={idx} className="text-gray-300">
+                <li key={idx} className="text-muted-foreground">
                   {ingredient}
                 </li>
               ))}
@@ -43,22 +43,17 @@ export const RecipeModal = ({ isOpen, onClose, recipe }: RecipeModalProps) => {
           <div>
             <h3 className="text-lg font-semibold mb-2">Instructions</h3>
             <div
-              className="text-gray-300 space-y-2 list-decimal list-inside"
+              className=" space-y-2 list-decimal list-inside"
               dangerouslySetInnerHTML={{ __html: recipe.instructions }}
-              style={{ listStyleType: 'decimal', marginLeft: '20px' }}
+              style={{ listStyleType: "decimal", marginLeft: "20px" }}
             />
           </div>
           <div className="flex justify-between pt-4">
-            <Button
-              variant="outline"
-              onClick={onClose}
-              className="text-white border-white/20 hover:bg-white/10"
-            >
+            <Button variant="outline" onClick={onClose}>
               Close
             </Button>
             <Button
               variant="outline"
-              className="text-white border-white/20 hover:bg-white/10"
               onClick={() => window.open(recipe.source_url, "_blank")}
             >
               View Source

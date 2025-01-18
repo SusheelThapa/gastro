@@ -1,7 +1,7 @@
 import { RecipeCard } from "./recipe-card";
 import Markdown from "react-markdown";
 import { useState } from "react";
-import { RecipeModal } from "./recipe-model";
+import { RecipeModal } from "./recipe-modal";
 
 export interface Recipe {
   id: string;
@@ -28,7 +28,6 @@ export const GastroAnswer = ({ type, result, recipes }: GastroAnswerProps) => {
     setSelectedRecipe(recipe);
   };
 
-  console.log(selectedRecipe);
 
   if (type === "chat") {
     console.log(result);
