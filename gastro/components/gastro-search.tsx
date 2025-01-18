@@ -30,10 +30,10 @@ const GastroSearch: React.FC = () => {
   };
 
   const suggestions = [
-    { label: "Top recipes for dinner", icon: "🍽️" },
-    { label: "Healthy breakfast options", icon: "🥑" },
-    { label: "Quick lunch recipes", icon: "🥪" },
-    { label: "Best dessert discoveries", icon: "🍰" },
+    { label: "Let's Cook Dinner: Chicken, Spinach, and Tomato", icon: "🍽️" },
+    { label: "Quick Lunch Ideas: Avocado, Egg, and Spinach", icon: "🥑" },
+    { label: "Healthy Breakfast: Oatmeal, Banana, and Almond Butter", icon: "🥪" },
+    { label: "Dessert Time: Chocolate, Strawberries, and Cream", icon: "🍰" },
   ];
 
   return (
