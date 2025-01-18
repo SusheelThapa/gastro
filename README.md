@@ -15,14 +15,21 @@
 
 ## **Demo**
 
-Loading...
+https://github.com/user-attachments/assets/040a8a42-346b-4378-9578-356d5e6beb0a
 
 ## **Usage**
 
+### **Running the Agent**
+
+1. **Navigate to agent**
+   ```bash
+   cd agent
+   ```
+   
 1. **Create a virtual environment:**
 
    ```bash
-   python -m venv venv
+   python3 -m venv venv
    ```
 
 2. **Activate the virtual environment:**
@@ -47,7 +54,7 @@ Loading...
    uvicorn main:app --host 127.0.0.1 --port 8000 --reload
    ```
 
-## **Running the UI**
+### **Running the UI**
 
 1. **Navigate to the UI directory:**
 
