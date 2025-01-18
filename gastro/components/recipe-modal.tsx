@@ -49,14 +49,11 @@ export const RecipeModal = ({ isOpen, onClose, recipe }: RecipeModalProps) => {
             />
           </div>
           <div className="flex justify-between pt-4">
-            <Button  onClick={onClose}>
-              Close
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={() => window.open(recipe.source_url, "_blank")}
-            >
+            <Button onClick={() => window.open(recipe.source_url, "_blank")}>
               View Source
+            </Button>
+            <Button variant="ghost" onClick={onClose}>
+              Close
             </Button>
           </div>
         </div>

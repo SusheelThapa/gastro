@@ -83,7 +83,7 @@ export function RecipeCard({
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <Button
-          variant="outline"
+          variant="ghost"
           onClick={() =>
             handleShowMore({
               id,
@@ -100,7 +100,6 @@ export function RecipeCard({
         </Button>
         {sourceUrl && (
           <Button
-            variant="outline"
             onClick={() => window.open(sourceUrl, "_blank")}
           >
             View Source
